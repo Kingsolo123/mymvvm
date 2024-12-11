@@ -12,6 +12,11 @@
         android:id="@+id/mine_fragment"
         android:name="com.king.mvvm_wanandroid.ui.mine.MineFragment"
         android:label="MineFragment" >
+        <action
+            android:id="@+id/action_mine_fragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/wechat_fragment"
@@ -21,4 +26,8 @@
         android:id="@+id/project_fragment"
         android:name="com.king.mvvm_wanandroid.ui.project.ProjectFragment"
         android:label="ProjectFragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.king.mvvm_wanandroid.ui.login.LoginFragment"
+        android:label="LoginFragment" />
 </navigation>

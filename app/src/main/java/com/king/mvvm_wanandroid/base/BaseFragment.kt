@@ -1,6 +1,7 @@
 package com.king.mvvm_wanandroid.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,14 +19,17 @@ abstract class BaseFragment<VIEW : ViewBinding> : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _mBinding=viewBinding(inflater,container,savedInstanceState)
-
+        Log.d("feng","${javaClass.name} onCreateView 执行")
         return _mBinding?.root
     }
 
     override fun onStart() {
         super.onStart()
+        Log.d("feng","${javaClass.name} onStart 执行")
         init()
     }
+
+
 
     abstract fun viewBinding(
         inflater: LayoutInflater,
