@@ -19,13 +19,11 @@ abstract class BaseFragment<VIEW : ViewBinding> : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _mBinding=viewBinding(inflater,container,savedInstanceState)
-        Log.d("feng","${javaClass.name} onCreateView 执行")
         return _mBinding?.root
     }
 
     override fun onStart() {
         super.onStart()
-        Log.d("feng","${javaClass.name} onStart 执行")
         init()
     }
 

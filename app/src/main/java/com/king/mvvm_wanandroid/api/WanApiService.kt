@@ -1,11 +1,15 @@
 package com.king.mvvm_wanandroid.api
 
+import com.king.mvvm_wanandroid.bean.HomeBanner
+import com.king.mvvm_wanandroid.bean.HomeBean
 import com.king.mvvm_wanandroid.bean.LoginBean
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface WanApiService {
@@ -22,6 +26,17 @@ interface WanApiService {
         @Query("password") password: String,
         @Query("repassword") repassword: String
     ): WanJetpackResponse<LoginBean>
+
+    /**
+     * 获取首页文章列表
+     */
+    @GET("/article/list/{page}/json")
+    suspend fun getHomeArticle(
+        @Path("page") page: Int
+    ): WanJetpackResponse<HomeBean>
+
+    @GET("/banner/json")
+    suspend fun getHomeBanner():WanJetpackResponse<HomeBanner>
 
     companion object {
         private const val BASE_URL = "https://www.wanandroid.com/"

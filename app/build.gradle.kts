@@ -54,6 +54,8 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation(libs.logging.interceptor)
     implementation(libs.converter.gson)
+    implementation(libs.viewpager2)
+    implementation(libs.glide)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

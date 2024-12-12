@@ -8,6 +8,7 @@ import com.king.mvvm_wanandroid.api.WanApiService
 import com.king.mvvm_wanandroid.api.WanJetpackRepository
 import com.king.mvvm_wanandroid.base.BaseViewModel
 import com.king.mvvm_wanandroid.bean.LoginBean
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
 class LoginViewModel : BaseViewModel() {
@@ -36,6 +37,7 @@ class LoginViewModel : BaseViewModel() {
     val userBean: MutableLiveData<LoginBean> by lazy {
         MutableLiveData<LoginBean>()
     }
+
     private var repository: WanJetpackRepository
 
 
@@ -44,15 +46,21 @@ class LoginViewModel : BaseViewModel() {
         repository = WanJetpackRepository(api)
     }
 
-//    fun login() = liveData {
-//        emit(repository.login(username.value ?: "", password.value ?: ""))
-//    }
+    fun login2() = liveData {
+        emit(repository.login(username.value ?: "", password.value ?: ""))
+    }
+
+    fun login1() = flow {
+        emit(repository.login(username.value ?: "", password.value ?: ""))
+    }
+
+//    val data3
+
 
     fun login() {
-        Log.e("feng", "username==${username.value}    password==${password.value}")
         viewModelScope.launch {
             try {
-                val data = repository.login(username.value?:"", password.value?:"")
+                val data = repository.login(username.value ?: "", password.value ?: "")
                 if (data.errorCode == 0) {
                     userBean.value = data.data
                 }
@@ -65,7 +73,13 @@ class LoginViewModel : BaseViewModel() {
 
 
     fun register() = liveData {
-        emit(repository.register(username.value ?: "", password.value ?: "", password.value ?: ""))
+        emit(
+            repository.register(
+                username.value ?: "",
+                password.value ?: "",
+                repassword.value ?: ""
+            )
+        )
     }
 
 

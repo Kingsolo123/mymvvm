@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -16,14 +17,11 @@ import kotlinx.coroutines.GlobalScope
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {
     private val mViewModel: LoginViewModel by viewModels()
 
-    //    private lateinit var mLoginBinding:FragmentLoginBinding
     override fun viewBinding(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): FragmentLoginBinding {
-
-//        mLoginBinding=DataBindingUtil.setContentView(this,R.layout.fragment_)
         return FragmentLoginBinding.inflate(inflater, container, false)
     }
 
@@ -40,9 +38,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
         }
 
         binding.setLoginClickListener {
-            Log.d("feng", "UI 用户名 ==${binding.username.editText?.text}  密码 ==${binding.password.editText?.text}")
-            Log.d("feng", "UI1 用户名 ==${mViewModel.username.value}  密码 ==${mViewModel.password.value}")
             mViewModel.login()
+//            mViewModel.login1().collect { data ->
+//                Log.d("feng", "订阅登陆成功 ==${data}")
+//            }
         }
 
 //        binding.registerButton.setOnClickListener {
