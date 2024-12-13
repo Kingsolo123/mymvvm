@@ -3,6 +3,7 @@ package com.king.mvvm_wanandroid.api
 import com.king.mvvm_wanandroid.bean.HomeBanner
 import com.king.mvvm_wanandroid.bean.HomeBean
 import com.king.mvvm_wanandroid.bean.LoginBean
+import kotlinx.coroutines.flow.Flow
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -36,13 +37,17 @@ interface WanApiService {
     ): WanJetpackResponse<HomeBean>
 
     @GET("/banner/json")
-    suspend fun getHomeBanner():WanJetpackResponse<HomeBanner>
+    suspend fun getHomeBanner(): WanJetpackResponse<HomeBanner>
+
+    @GET("/banner/json")
+    suspend fun getHomeBanner1(): WanJetpackResponse<HomeBanner>
 
     companion object {
         private const val BASE_URL = "https://www.wanandroid.com/"
 
         fun create(): WanApiService {
-            val logger = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
+            val logger =
+                HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC }
             val client = OkHttpClient.Builder()
                 .addInterceptor(logger)
 //                .cookieJar(LocalCookie())
@@ -55,7 +60,7 @@ interface WanApiService {
                 .baseUrl(BASE_URL)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
-                //.addCallAdapterFactory(LiveDataCallAdapterFactory())
+//                .addCallAdapterFactory(LiveDataCallAdapterFactory())
                 .build()
                 .create(WanApiService::class.java)
         }

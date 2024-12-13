@@ -1,12 +1,10 @@
 package com.king.mvvm_wanandroid.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.king.mvvm_wanandroid.R
 import com.king.mvvm_wanandroid.bean.HomeBannerItem
 import com.king.mvvm_wanandroid.databinding.ItemHomeBannerBinding
 
@@ -26,12 +24,14 @@ class HomeBannerAdapter : RecyclerView.Adapter<HomeBannerAdapter.HomeBannerViewH
     }
 
     override fun onBindViewHolder(holder: HomeBannerViewHolder, position: Int) {
-//        Glide.with(holder.itemView).load(mData[position].imagePath).into(binding.itemHomeIcon)
         holder.bindData(mData[position])
+
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(mData: MutableList<HomeBannerItem>) {
         this.mData = mData
+        notifyDataSetChanged()
     }
 
 
@@ -50,7 +50,6 @@ class HomeBannerAdapter : RecyclerView.Adapter<HomeBannerAdapter.HomeBannerViewH
             binding.apply {
                 this.homeModel = data
                 Glide.with(itemView).load(data.imagePath).into(itemHomeIcon)
-                executePendingBindings()
             }
         }
     }

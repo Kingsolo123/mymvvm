@@ -7,10 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.king.mvvm_wanandroid.base.BaseFragment
 import com.king.mvvm_wanandroid.databinding.FragmentHomeBinding
 import com.king.mvvm_wanandroid.ui.adapter.HomeBannerAdapter
 import com.king.mvvm_wanandroid.viewmodel.home.HomeViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
@@ -30,9 +35,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
         binding.homeViewPager.adapter = mHomeBannerAdapter
         binding.lifecycleOwner = viewLifecycleOwner
         mHomeModel.homeBannerBean.observe(viewLifecycleOwner) { data ->
-            Log.d("feng","收到banner数据")
             mHomeBannerAdapter.setData(data)
-            mHomeBannerAdapter.notifyDataSetChanged()
         }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                mHomeModel.uiState.collect{
+                    uiState-> mHomeBannerAdapter.setData(uiState)
+                }
+            }
+        }
+
     }
+
 }
