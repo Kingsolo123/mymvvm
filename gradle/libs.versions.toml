@@ -18,6 +18,9 @@ converterGson = "2.11.0"
 viewpager2 = "1.0.0"
 viewpager2Version = "1.1.0-beta01"
 glide = "5.0.0-rc01"
+pagingCommon = "3.1.1"
+runtime = "1.0.1"
+pagingRuntime = "3.1.1"
 
 
 [libraries]
@@ -40,6 +43,9 @@ converter-gson = { group = "com.squareup.retrofit2", name = "converter-gson", ve
 androidx-viewpager2 = { group = "androidx.viewpager2", name = "viewpager2", version.ref = "viewpager2" }
 viewpager2 = { group = "androidx.viewpager2", name = "viewpager2", version.ref = "viewpager2Version" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+androidx-paging-common = { group = "androidx.paging", name = "paging-common", version.ref = "pagingCommon" }
+runtime = { group = "android.arch.paging", name = "runtime", version.ref = "runtime" }
+androidx-paging-runtime = { group = "androidx.paging", name = "paging-runtime", version.ref = "pagingRuntime" }
 
 
 [plugins]

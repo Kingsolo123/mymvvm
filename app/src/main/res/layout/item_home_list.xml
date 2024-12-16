@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="android.text.TextUtils" alias="textUtlis" />
+
+        <import
+            alias="textUtlis"
+            type="android.text.TextUtils" />
+
         <variable
             name="article"
             type="com.king.mvvm_wanandroid.bean.HomeListBean" />
@@ -19,15 +24,16 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="4dp">
+            android:padding="14dp">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/favorite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@{article.collect ? @drawable/ic_favorite_24 : @drawable/ic_favorite_border_24}"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                tools:src="@drawable/ic_favorite_24" />
 
             <TextView
                 android:id="@+id/article_title"
@@ -36,33 +42,36 @@
                 android:scaleType="centerCrop"
                 android:text="@{article.title}"
                 android:textAppearance="?attr/textAppearanceListItem"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/favorite"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="就打了数控刀具打架复健科啦时间到了卡机大街上颗粒剂大家啊蓝思科技了" />
 
             <TextView
                 android:id="@+id/project_author"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:gravity="center_horizontal"
                 android:text="@{!textUtlis.isEmpty(article.author) ? article.author : article.shareUser}"
                 android:textAppearance="?attr/textAppearanceListItemSecondary"
                 android:textColor="@android:color/secondary_text_dark"
-                android:gravity="center_horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/article_title"
                 app:layout_constraintTop_toBottomOf="@id/article_title"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                tools:text="dsddasdlak大嫂大嫂大" />
 
             <TextView
                 android:id="@+id/article_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
                 android:text="@{@string/item_niceDate(article.niceDate)}"
                 android:textAppearance="?attr/textAppearanceListItemSecondary"
                 android:textColor="@android:color/secondary_text_dark"
-                android:gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/project_author"/>
+                app:layout_constraintTop_toTopOf="@id/project_author"
+                tools:text="时间：2024-09-01 17:23:22" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

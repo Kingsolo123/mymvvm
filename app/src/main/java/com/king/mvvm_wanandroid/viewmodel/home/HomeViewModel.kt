@@ -2,7 +2,10 @@ package com.king.mvvm_wanandroid.viewmodel.home
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.king.mvvm_wanandroid.api.WanApiService
 import com.king.mvvm_wanandroid.api.WanJetpackRepository
 import com.king.mvvm_wanandroid.api.WanJetpackResponse
@@ -22,6 +25,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.math.tan
 
 class HomeViewModel : BaseViewModel() {
 
@@ -44,6 +48,11 @@ class HomeViewModel : BaseViewModel() {
         MutableLiveData<HomeBean>()
     }
 
+     fun getHomeArticle(): Flow<PagingData<HomeListBean>> {
+        val newResult: Flow<PagingData<HomeListBean>> =
+            repository.getHomeArticle().cachedIn(viewModelScope)
+        return newResult
+    }
 
 //    fun getHomeArticle(): Flow<PagingData<ApiArticle>> {
 //        val newResult: Flow<PagingData<ApiArticle>> =
@@ -88,6 +97,7 @@ class HomeViewModel : BaseViewModel() {
         repository.getBanner().collect { response ->
 //            homeBannerBean.value = response.data
 //            _uiBannerState.value = response
+            Log.d("feng","viewmodel 收到值==${response}")
             response?.let {
                 _uiBannerState.value = it
             }
@@ -112,6 +122,7 @@ class HomeViewModel : BaseViewModel() {
         viewModelScope.launch {
             Log.d("feng", "Thread=${Thread.currentThread()} viewModelScope.launch")
             val data = repository.getHomeBanner1()
+            homeBannerBean.value= data.data
             val str = getString()
             Log.d("feng", "Thread=${Thread.currentThread()} str==${str}")
             Log.d("feng", "Thread=${Thread.currentThread()} data==${data.data}")
@@ -129,7 +140,7 @@ class HomeViewModel : BaseViewModel() {
 
     fun getHomeList() {
         viewModelScope.launch {
-            val data = repository.getHomeArticle(0)
+            val data = repository.getHomeArticle()
 //            if (data.errorCode == 0) {
 //                homeListBean.value = data.data
 //            }

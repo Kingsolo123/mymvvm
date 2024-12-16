@@ -56,6 +56,8 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.viewpager2)
     implementation(libs.glide)
+    implementation(libs.androidx.paging.common)
+    implementation(libs.androidx.paging.runtime)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
